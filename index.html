@@ -5,164 +5,148 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lavanya Goel | BMS26058</title>
 <style>
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f5f3ef;
-    color: #222;
-  }
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 50px 22px;
-  }
-  header {
-    background: white;
-    border-radius: 22px;
-    padding: 38px;
-    text-align: center;
-    box-shadow: 0 8px 30px rgba(0,0,0,.07);
-    margin-bottom: 28px;
-  }
-  h1 { margin: 0 0 8px; font-size: 38px; }
-  .roll { color: #666; font-size: 17px; }
-  .projects {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
-  }
-  .project {
-    background: white;
-    border: 1px solid #e5e1da;
-    border-radius: 18px;
-    padding: 25px;
-    min-height: 180px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    box-shadow: 0 5px 20px rgba(0,0,0,.05);
-  }
-  .project h2 { margin: 0 0 8px; font-size: 22px; }
-  .project p { color: #777; margin: 0 0 18px; font-size: 14px; }
-  input {
-    width: 100%;
-    padding: 11px 12px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 14px;
-    margin-bottom: 10px;
-  }
-  button, a {
-    display: block;
-    width: 100%;
-    text-align: center;
-    padding: 11px 12px;
-    border-radius: 10px;
-    border: 0;
-    text-decoration: none;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  button { background: #222; color: white; }
-  a { background: #eee; color: #222; margin-top: 8px; }
-  .saved { color: #26734d; font-size: 13px; margin-top: 8px; min-height: 16px; }
-  .note {
-    text-align: center;
-    color: #777;
-    font-size: 13px;
-    margin-top: 24px;
-  }
-  @media (max-width: 700px) {
-    .projects { grid-template-columns: 1fr; }
-    h1 { font-size: 30px; }
-  }
+*{box-sizing:border-box}
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#eef3ff;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(0,212,255,.16),transparent 28%),
+    radial-gradient(circle at 85% 75%,rgba(122,92,255,.18),transparent 30%),
+    linear-gradient(135deg,#060b18,#0b1224 50%,#070b16);
+  overflow-x:hidden;
+}
+body:before{
+  content:"";
+  position:fixed;inset:0;pointer-events:none;opacity:.32;
+  background-image:
+    linear-gradient(rgba(90,140,220,.08) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(90,140,220,.08) 1px,transparent 1px);
+  background-size:42px 42px;
+}
+.container{max-width:1050px;margin:auto;padding:55px 22px;position:relative}
+header{
+  position:relative;text-align:center;padding:42px 25px;margin-bottom:30px;
+  border:1px solid rgba(102,190,255,.28);
+  border-radius:24px;
+  background:rgba(10,19,38,.72);
+  backdrop-filter:blur(14px);
+  box-shadow:0 0 45px rgba(0,170,255,.08),inset 0 1px rgba(255,255,255,.06);
+}
+.badge{
+  display:inline-block;padding:7px 13px;border-radius:20px;
+  border:1px solid rgba(0,212,255,.35);color:#68ddff;
+  font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px
+}
+h1{margin:0;font-size:44px;letter-spacing:1px}
+.roll{margin-top:10px;color:#aab8d5;font-size:16px}
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.project{
+  min-height:220px;padding:26px;border-radius:20px;
+  border:1px solid rgba(120,160,220,.2);
+  background:linear-gradient(145deg,rgba(18,31,57,.9),rgba(8,16,31,.82));
+  box-shadow:0 15px 40px rgba(0,0,0,.22);
+  transition:.25s;
+}
+.project:hover{transform:translateY(-4px);border-color:rgba(0,212,255,.45);box-shadow:0 18px 45px rgba(0,170,255,.12)}
+.project h2{margin:0 0 8px;font-size:22px}
+.project p{margin:0 0 18px;color:#8494b4;font-size:13px}
+input{
+  width:100%;padding:12px 13px;margin-bottom:10px;
+  border:1px solid #263b60;border-radius:10px;
+  background:#07101f;color:#eef3ff;outline:none
+}
+input:focus{border-color:#24cfff;box-shadow:0 0 0 3px rgba(36,207,255,.08)}
+button,a{
+  width:100%;display:block;text-align:center;padding:12px;
+  border-radius:10px;font-size:14px;cursor:pointer;text-decoration:none
+}
+button{border:0;background:linear-gradient(90deg,#08bce8,#685cff);color:white;font-weight:bold}
+a{margin-top:9px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:#c9f4ff}
+.saved{font-size:12px;color:#55e0a2;min-height:17px;margin-top:8px}
+.add{
+  margin-top:22px;padding:28px;text-align:center;border-radius:20px;
+  border:1px dashed rgba(82,205,255,.4);
+  background:rgba(10,20,38,.6)
+}
+.add button{max-width:260px;margin:15px auto 0}
+.note{text-align:center;color:#667895;font-size:12px;margin-top:22px;line-height:1.6}
+@media(max-width:700px){.projects{grid-template-columns:1fr}h1{font-size:34px}}
 </style>
 </head>
 <body>
 <div class="container">
-  <header>
-    <h1>Lavanya Goel</h1>
-    <div class="roll">Roll No. BMS26058</div>
-  </header>
+<header>
+  <div class="badge">Student Project Portal</div>
+  <h1>Lavanya Goel</h1>
+  <div class="roll">Roll No. BMS26058</div>
+</header>
 
-  <main class="projects">
-    <section class="project">
-      <div>
-        <h2>Project 1</h2>
-        <p>Enter the URL of your HTML project below.</p>
-        <input id="url1" type="url" placeholder="https://your-project.netlify.app">
-      </div>
-      <div>
-        <button onclick="saveProject(1)">Save Project 1</button>
-        <div class="saved" id="saved1"></div>
-        <a id="link1" href="#" target="_blank" style="display:none;">Open Project 1</a>
-      </div>
-    </section>
+<main class="projects" id="projects"></main>
 
-    <section class="project">
-      <div>
-        <h2>Project 2</h2>
-        <p>Enter the URL of your HTML project below.</p>
-        <input id="url2" type="url" placeholder="https://your-project.netlify.app">
-      </div>
-      <div>
-        <button onclick="saveProject(2)">Save Project 2</button>
-        <div class="saved" id="saved2"></div>
-        <a id="link2" href="#" target="_blank" style="display:none;">Open Project 2</a>
-      </div>
-    </section>
+<section class="add">
+  <strong>＋ Add More Projects</strong>
+  <div style="color:#7e8eaa;font-size:13px;margin-top:7px">Create as many project slots as you need.</div>
+  <button onclick="addProject()">Add Project</button>
+</section>
 
-    <section class="project">
-      <div>
-        <h2>Project 3</h2>
-        <p>Enter the URL of your HTML project below.</p>
-        <input id="url3" type="url" placeholder="https://your-project.netlify.app">
-      </div>
-      <div>
-        <button onclick="saveProject(3)">Save Project 3</button>
-        <div class="saved" id="saved3"></div>
-        <a id="link3" href="#" target="_blank" style="display:none;">Open Project 3</a>
-      </div>
-    </section>
-  </main>
-
-  <div class="note">
-    Add your Netlify HTML project URL to each field. Your professor can click “Open Project” to view it.
-  </div>
+<div class="note">
+  Enter the live URL of each HTML project and click Save. The Open Project button lets anyone viewing this portal access your project.
+</div>
 </div>
 
 <script>
-function saveProject(n) {
-  const input = document.getElementById('url' + n);
-  const link = document.getElementById('link' + n);
-  const saved = document.getElementById('saved' + n);
-  let url = input.value.trim();
+let count=0;
 
-  if (!url) {
-    saved.textContent = "Please enter a project URL.";
-    return;
-  }
-  if (!/^https?:\/\//i.test(url)) {
-    url = "https://" + url;
-  }
-
-  localStorage.setItem("project" + n, url);
-  link.href = url;
-  link.style.display = "block";
-  saved.textContent = "Project URL saved on this browser.";
+function createProject(url=""){
+  count++;
+  const n=count;
+  const card=document.createElement("section");
+  card.className="project";
+  card.id="project-card-"+n;
+  card.innerHTML=`
+    <div>
+      <h2>Project ${n}</h2>
+      <p>Enter the live URL of your HTML project.</p>
+      <input id="url${n}" type="url" placeholder="https://your-project.netlify.app" value="${url}">
+    </div>
+    <div>
+      <button onclick="saveProject(${n})">Save Project ${n}</button>
+      <div class="saved" id="saved${n}"></div>
+      <a id="link${n}" href="#" target="_blank" rel="noopener" style="display:none">Open Project ${n} ↗</a>
+    </div>`;
+  document.getElementById("projects").appendChild(card);
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-  [1,2,3].forEach(n => {
-    const url = localStorage.getItem("project" + n);
-    if (url) {
-      document.getElementById("url" + n).value = url;
-      document.getElementById("link" + n).href = url;
-      document.getElementById("link" + n).style.display = "block";
-      document.getElementById("saved" + n).textContent = "Project URL saved on this browser.";
+function saveProject(n){
+  const input=document.getElementById("url"+n);
+  const link=document.getElementById("link"+n);
+  const saved=document.getElementById("saved"+n);
+  let url=input.value.trim();
+  if(!url){saved.textContent="Please enter a project URL.";return;}
+  if(!/^https?:\/\//i.test(url)) url="https://"+url;
+  localStorage.setItem("project"+n,url);
+  link.href=url; link.style.display="block";
+  saved.textContent="✓ Project URL saved";
+}
+
+function addProject(){createProject();}
+
+window.addEventListener("DOMContentLoaded",()=>{
+  const saved=Object.keys(localStorage)
+    .filter(k=>/^project\d+$/.test(k))
+    .sort((a,b)=>parseInt(a.slice(7))-parseInt(b.slice(7)));
+  const total=Math.max(3,saved.length);
+  for(let i=1;i<=total;i++){
+    createProject(localStorage.getItem("project"+i)||"");
+    const url=localStorage.getItem("project"+i);
+    if(url){
+      const link=document.getElementById("link"+i);
+      link.href=url;link.style.display="block";
+      document.getElementById("saved"+i).textContent="✓ Project URL saved";
     }
-  });
+  }
 });
 </script>
 </body>
