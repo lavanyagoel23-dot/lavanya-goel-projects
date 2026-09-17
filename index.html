@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lavanya Goel | Project Portfolio</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f3ef;
+      color: #202020;
+      min-height: 100vh;
+    }
+    header {
+      background: #171717;
+      color: white;
+      padding: 42px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    header h1 { font-size: clamp(28px, 5vw, 48px); }
+    header p { margin-top: 8px; color: #cfcfcf; font-size: 16px; }
+    .badge {
+      border: 1px solid #777;
+      padding: 12px 18px;
+      border-radius: 30px;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+    main { width: min(1100px, 90%); margin: 45px auto; }
+    .intro { margin-bottom: 28px; }
+    .intro h2 { font-size: 28px; margin-bottom: 8px; }
+    .intro p { color: #666; }
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .project-card {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 18px;
+      padding: 28px;
+      min-height: 190px;
+      cursor: pointer;
+      transition: .2s;
+      box-shadow: 0 5px 20px rgba(0,0,0,.05);
+    }
+    .project-card:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(0,0,0,.1); }
+    .project-number { color: #888; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+    .project-card h3 { margin: 15px 0 10px; font-size: 24px; }
+    .project-card p { color: #777; line-height: 1.5; }
+    .saved { margin-top: 18px; color: #333; font-size: 13px; font-weight: bold; }
+    .add-project {
+      min-height: 190px;
+      border: 2px dashed #bbb;
+      background: transparent;
+      border-radius: 18px;
+      font: inherit;
+      font-size: 18px;
+      font-weight: bold;
+      color: #555;
+      cursor: pointer;
+      transition: .2s;
+    }
+    .add-project:hover {
+      border-color: #555;
+      background: #fff;
+      transform: translateY(-5px);
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.6);
+      padding: 20px;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+    .modal.show { display: flex; }
+    .modal-box {
+      background: white;
+      width: min(720px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 20px;
+      padding: 30px;
+    }
+    .modal-top { display:flex; justify-content:space-between; align-items:center; gap:15px; margin-bottom:22px; }
+    .close {
+      border: none; background: #eee; border-radius: 50%; width: 38px; height: 38px;
+      cursor:pointer; font-size: 20px;
+    }
+    label { display:block; font-weight:bold; margin:16px 0 7px; }
+    input, textarea {
+      width:100%; border:1px solid #ccc; border-radius:10px; padding:13px;
+      font: inherit; outline:none;
+    }
+    input:focus, textarea:focus { border-color:#555; }
+    textarea { min-height:180px; resize:vertical; }
+    .buttons { display:flex; gap:10px; margin-top:20px; }
+    button.action {
+      border:none; border-radius:10px; padding:12px 20px; cursor:pointer; font-weight:bold;
+    }
+    .save { background:#171717; color:white; }
+    .clear { background:#eee; color:#222; }
+    footer { text-align:center; padding:35px; color:#888; font-size:13px; }
+    @media(max-width:750px) {
+      header { flex-direction:column; align-items:flex-start; }
+      .projects { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Lavanya Goel</h1>
+    <p>BMS Student • Project Portfolio</p>
+  </div>
+  <div class="badge">Roll No. BMS26058</div>
+</header>
+
+<main>
+  <section class="intro">
+    <h2>IIS Projects</h2>
+    <p>Click on any project to add, edit, and save your work.</p>
+  </section>
+
+  <section class="projects" id="projectsContainer">
+    <div class="project-card" onclick="openProject(1)">
+      <span class="project-number">Project 01</span>
+      <h3 id="cardTitle1">Project 1</h3>
+      <p id="cardDesc1">Click to add your project.</p>
+      <div class="saved" id="saved1"></div>
+    </div>
+
+    <div class="project-card" onclick="openProject(2)">
+      <span class="project-number">Project 02</span>
+      <h3 id="cardTitle2">Project 2</h3>
+      <p id="cardDesc2">Click to add your project.</p>
+      <div class="saved" id="saved2"></div>
+    </div>
+
+    <div class="project-card" onclick="openProject(3)">
+      <span class="project-number">Project 03</span>
+      <h3 id="cardTitle3">Project 3</h3>
+      <p id="cardDesc3">Click to add your project.</p>
+      <div class="saved" id="saved3"></div>
+    </div>
+
+    <button class="add-project" onclick="addProject()">＋ Add More Project</button>
+  </section>
+</main>
+
+<footer>Lavanya Goel • BMS26058</footer>
+
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <div class="modal-top">
+      <h2 id="modalHeading">Project 1</h2>
+      <button class="close" onclick="closeProject()">×</button>
+    </div>
+
+    <label for="projectTitle">Project Title</label>
+    <input id="projectTitle" placeholder="e.g. Market Research Project">
+
+    <label for="projectDescription">Short Description</label>
+    <input id="projectDescription" placeholder="A short description of your project">
+
+    <label for="projectDetails">Project Details</label>
+    <textarea id="projectDetails" placeholder="Write your project work, objectives, methodology, findings, links, etc."></textarea>
+
+    <div class="buttons">
+      <button class="action save" onclick="saveProject()">Save Project</button>
+      <button class="action clear" onclick="clearProject()">Clear</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  let currentProject = 1;
+  let projectCount = 3;
+
+  function openProject(number) {
+    currentProject = number;
+    document.getElementById("modalHeading").textContent = "Project " + number;
+
+    const data = JSON.parse(localStorage.getItem("lavanyaProject" + number) || "{}");
+    document.getElementById("projectTitle").value = data.title || "";
+    document.getElementById("projectDescription").value = data.description || "";
+    document.getElementById("projectDetails").value = data.details || "";
+
+    document.getElementById("modal").classList.add("show");
+  }
+
+  function closeProject() {
+    document.getElementById("modal").classList.remove("show");
+  }
+
+  function saveProject() {
+    const data = {
+      title: document.getElementById("projectTitle").value.trim(),
+      description: document.getElementById("projectDescription").value.trim(),
+      details: document.getElementById("projectDetails").value.trim()
+    };
+
+    localStorage.setItem("lavanyaProject" + currentProject, JSON.stringify(data));
+    updateCard(currentProject, data);
+    closeProject();
+  }
+
+  function clearProject() {
+    if (!confirm("Clear this project's saved information?")) return;
+    localStorage.removeItem("lavanyaProject" + currentProject);
+    updateCard(currentProject, {});
+    document.getElementById("projectTitle").value = "";
+    document.getElementById("projectDescription").value = "";
+    document.getElementById("projectDetails").value = "";
+  }
+
+  function updateCard(number, data) {
+    document.getElementById("cardTitle" + number).textContent = data.title || "Project " + number;
+    document.getElementById("cardDesc" + number).textContent =
+      data.description || "Click to add your project.";
+    document.getElementById("saved" + number).textContent =
+      data.title || data.details ? "✓ Saved" : "";
+  }
+
+  function addProject() {
+    projectCount++;
+    const number = projectCount;
+
+    const card = document.createElement("div");
+    card.className = "project-card";
+    card.onclick = () => openProject(number);
+    card.innerHTML = `
+      <span class="project-number">Project ${String(number).padStart(2, "0")}</span>
+      <h3 id="cardTitle${number}">Project ${number}</h3>
+      <p id="cardDesc${number}">Click to add your project.</p>
+      <div class="saved" id="saved${number}"></div>
+    `;
+
+    const addButton = document.querySelector(".add-project");
+    document.getElementById("projectsContainer").insertBefore(card, addButton);
+
+    localStorage.setItem("lavanyaProjectCount", projectCount);
+  }
+
+  function loadProjects() {
+    projectCount = Number(localStorage.getItem("lavanyaProjectCount") || 3);
+
+    for (let i = 1; i <= projectCount; i++) {
+      if (i > 3) {
+        const card = document.createElement("div");
+        card.className = "project-card";
+        card.onclick = () => openProject(i);
+        card.innerHTML = `
+          <span class="project-number">Project ${String(i).padStart(2, "0")}</span>
+          <h3 id="cardTitle${i}">Project ${i}</h3>
+          <p id="cardDesc${i}">Click to add your project.</p>
+          <div class="saved" id="saved${i}"></div>
+        `;
+        const addButton = document.querySelector(".add-project");
+        document.getElementById("projectsContainer").insertBefore(card, addButton);
+      }
+
+      const data = JSON.parse(localStorage.getItem("lavanyaProject" + i) || "{}");
+      updateCard(i, data);
+    }
+  }
+
+  document.getElementById("modal").addEventListener("click", function(e) {
+    if (e.target === this) closeProject();
+  });
+
+  loadProjects();
+</script>
+
+</body>
+</html>
